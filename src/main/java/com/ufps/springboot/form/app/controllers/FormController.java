@@ -32,12 +32,7 @@ public class FormController {
 		
 		model.addAttribute("titulo", "Resultado del formulario");
 		if(result.hasErrors()) {
-			System.out.println("Entra 1");
-			Map<String,String> errores = new HashMap<>();
-			result.getFieldErrors().forEach(err->{
-				errores.put(err.getField(), "El campo ".concat(err.getField()).concat(" ").concat(err.getDefaultMessage()));
-			});
-			model.addAttribute("error", errores);
+
 			return "form";
 		}
 		System.out.println("Entra 2");
