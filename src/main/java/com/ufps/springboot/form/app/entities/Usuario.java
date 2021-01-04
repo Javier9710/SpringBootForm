@@ -3,10 +3,13 @@ package com.ufps.springboot.form.app.entities;
 import javax.validation.constraints.NotEmpty;
 
 public class Usuario {
+	
 	@NotEmpty
 	private String username;
+	
 	@NotEmpty
 	private String password;
+	
 	@NotEmpty
 	private String email;
 
