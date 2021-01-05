@@ -1,14 +1,18 @@
 package com.ufps.springboot.form.app.entities;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.ufps.springboot.form.app.validation.IdRegex;
 
 public class Usuario {
 	
 	//@NotEmpty
 	//@Pattern(regexp="[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
+	@IdRegex
 	private String id;
 	
 	//@NotEmpty(message = "El nombre no puede ser vacio")
@@ -17,7 +21,8 @@ public class Usuario {
 	@NotEmpty(message = "El apellido no puede ser vacio")
 	private String apellido;
 	
-	@NotEmpty
+	//@NotEmpty
+	@NotBlank
 	@Size(min=3, max=8)
 	private String username;
 	
