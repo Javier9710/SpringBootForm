@@ -62,7 +62,7 @@
 				<div>
 			<label for="fecha">Fecha Nacimiento</label>
 			<div>
-				<input type="text" id="fecha" th:field="*{fecha}" placeholder="yyyy/MM/dd">
+				<input type="date" id="fecha" th:field="*{fecha}" placeholder="yyyy/MM/dd">
 			</div>
 			<div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
 		</div>
