@@ -1,7 +1,5 @@
 package com.ufps.springboot.form.app.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -11,33 +9,39 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.ufps.springboot.form.app.entities.Usuario;
 
 @Controller
+@SessionAttributes("usuario")
 public class FormController {
 	
 	@GetMapping("/form")
 	public String form(Model model) {
 		
 		Usuario usuario = new  Usuario();
+		usuario.setNombre("Jhon");
+		usuario.setApellido("Delgado");
+		usuario.setId("123.456.789-k");
 		model.addAttribute("titulo", "Formulario de Usuario");
-		model.addAttribute("user", usuario);
+		model.addAttribute("usuario", usuario);
 		return "form";
 		
 	}
 	
 	@PostMapping("/form")
-	public String procesar(@Valid @ModelAttribute("user") Usuario usuario, BindingResult result ,Model model) {
+	public String procesar(@Valid Usuario usuario, BindingResult result ,Model model, SessionStatus sesion) {
 		
 		model.addAttribute("titulo", "Resultado del formulario");
 		if(result.hasErrors()) {
 
 			return "form";
 		}
-		System.out.println("Entra 2");
+
 		model.addAttribute("usuario", usuario);
-		
+		sesion.setComplete();
 		return "resultado"; 
 	}
 
