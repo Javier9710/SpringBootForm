@@ -1,40 +1,50 @@
 package com.ufps.springboot.form.app.entities;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.ufps.springboot.form.app.validation.IdRegex;
+import com.ufps.springboot.form.app.validation.Requerido;
 
 public class Usuario {
-	
-	//@NotEmpty
-	//@Pattern(regexp="[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
+
+	// @NotEmpty
+	// @Pattern(regexp="[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
 	@IdRegex
 	private String id;
-	
-	//@NotEmpty(message = "El nombre no puede ser vacio")
+
+	// @NotEmpty(message = "El nombre no puede ser vacio")
 	private String nombre;
-	
-	@NotEmpty(message = "El apellido no puede ser vacio")
+
+	// @NotEmpty(message = "El apellido no puede ser vacio")
+	@Requerido
 	private String apellido;
-	
-	//@NotEmpty
+
+	// @NotEmpty
 	@NotBlank
-	@Size(min=3, max=8)
+	@Size(min = 3, max = 8)
 	private String username;
-	
+
 	@NotEmpty
 	private String password;
-	
-	@NotEmpty
+
+	@Requerido
 	@Email(message = "El correo es invalido")
 	private String email;
-	
-	
 
+	@NotNull
+	@Min(5)
+	@Max(5000)
+	private Integer cuenta;
+
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -81,6 +91,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Integer cuenta) {
+		this.cuenta = cuenta;
 	}
 
 }
