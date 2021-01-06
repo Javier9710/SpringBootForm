@@ -1,9 +1,13 @@
 package com.ufps.springboot.form.app.controllers;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +26,19 @@ import com.ufps.springboot.form.app.validation.UsuarioValidacion;
 @SessionAttributes("usuario")
 public class FormController {
 	
+	
 	@Autowired
 	private UsuarioValidacion validador;
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(validador);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class,"fecha", new CustomDateEditor(dateFormat, true));
 	}
+	
 	
 	@GetMapping("/form")
 	public String form(Model model) {
