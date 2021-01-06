@@ -53,9 +53,20 @@ public class Usuario {
 	@Future
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
+	
+	@NotEmpty
+	private String pais;
 
 	
 	
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
 	public String getId() {
 		return id;
 	}

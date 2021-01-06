@@ -7,6 +7,7 @@
 <body>
 	<h3 th:text="${titulo}"></h3>
 	<ul>
+		<li th:text="${usuario.pais}"></li>
 		<li th:text="${usuario.nombre}"></li>
 		<li th:text="${usuario.apellido}"></li>
 		<li th:text="${usuario.username}"></li>
@@ -14,6 +15,7 @@
 		<li th:text="${usuario.email}"></li>
 		<li th:text="${usuario.id}"></li>
 		<li th:text="${usuario.cuenta}"></li>
+		<li th:text="${(#calendars.format(usuario.fecha,'dd/MM/yyyy'))}"></li>
 	</ul>
 </body>
 </html>

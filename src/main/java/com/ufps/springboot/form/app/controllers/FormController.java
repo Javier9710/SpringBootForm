@@ -2,7 +2,9 @@ package com.ufps.springboot.form.app.controllers;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -45,6 +47,10 @@ public class FormController {
 	
 	}
 	
+	@ModelAttribute("paises")
+	public List<String> paises(){
+		return Arrays.asList("España","Mexico", "Colombia", "Argentina");
+	}
 	
 	
 	@GetMapping("/form")
