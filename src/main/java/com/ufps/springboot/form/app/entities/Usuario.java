@@ -2,6 +2,7 @@ package com.ufps.springboot.form.app.entities;
 
 import java.util.Date;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
@@ -53,17 +54,17 @@ public class Usuario {
 	@Future
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
-	
-	@NotEmpty
-	private String pais;
+
+	@Valid
+	private Pais pais;
 
 	
 	
-	public String getPais() {
+	public Pais getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
 
