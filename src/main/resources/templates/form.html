@@ -10,15 +10,26 @@
 
 
 		<div>
-			<label for="pais.codigo">Pais</label>
+			<label for="pais">Pais</label>
 			<div>
-				<select id="pais.codigo" th:field="*{pais.codigo}">
-				<option value="">-- Seleccionar --</option>
-				<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.codigo}"></option>
-				
+				<select id="pais" th:field="*{pais}">
+					<option value="">-- Seleccionar --</option>
+					<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}"
+						th:value="${pais.id}"></option>
+
 				</select>
 			</div>
-			<div th:if="${#fields.hasErrors('pais.codigo')}" th:errors="*{pais.codigo}"></div>
+			<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+		</div>
+		<div>
+
+			<label>Roles</label>
+			<div th:each="rol: ${listaRoles}">
+
+				<input type="checkbox" th:field="*{roles}" th:value="${rol}"> 
+				<label th:for="${#ids.prev('roles')}" th:text="${rol}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
 
 		<div>

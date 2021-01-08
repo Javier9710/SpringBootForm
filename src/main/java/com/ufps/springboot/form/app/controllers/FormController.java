@@ -1,6 +1,7 @@
 package com.ufps.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,13 +24,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.ufps.springboot.form.app.editors.MayusculaEditor;
+import com.ufps.springboot.form.app.editors.PaisPropertyEditor;
 import com.ufps.springboot.form.app.entities.Pais;
 import com.ufps.springboot.form.app.entities.Usuario;
+import com.ufps.springboot.form.app.services.PaisService;
 import com.ufps.springboot.form.app.validation.UsuarioValidacion;
 
 @Controller
 @SessionAttributes("usuario")
 public class FormController {
+	
+	@Autowired
+	private PaisPropertyEditor paisEditor;
+	
+	@Autowired
+	private PaisService paisService;
 
 	@Autowired
 	private UsuarioValidacion validador;
@@ -43,6 +52,8 @@ public class FormController {
 
 		binder.registerCustomEditor(String.class, "nombre", new MayusculaEditor());
 		binder.registerCustomEditor(String.class, "apellido", new MayusculaEditor());
+		
+		binder.registerCustomEditor(Pais.class, "pais", paisEditor);
 
 	}
 	
@@ -68,6 +79,16 @@ public class FormController {
 		paises.put("MX", "Mexico");
 		return paises;
 
+	}
+	
+	@ModelAttribute("listaRoles")
+	public List<String> listaRoles(){
+		List<String> roles = new ArrayList<>();
+		roles.add("ROLE_ADMIN");
+		roles.add("ROLE_USER");
+		roles.add("ROLE_MODERADOR");
+		
+		return roles;
 	}
 
 	@GetMapping("/form")
