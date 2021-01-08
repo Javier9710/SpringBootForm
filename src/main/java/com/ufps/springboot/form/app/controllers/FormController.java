@@ -25,20 +25,28 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.ufps.springboot.form.app.editors.MayusculaEditor;
 import com.ufps.springboot.form.app.editors.PaisPropertyEditor;
+import com.ufps.springboot.form.app.editors.RolEditor;
 import com.ufps.springboot.form.app.entities.Pais;
+import com.ufps.springboot.form.app.entities.Rol;
 import com.ufps.springboot.form.app.entities.Usuario;
 import com.ufps.springboot.form.app.services.PaisService;
+import com.ufps.springboot.form.app.services.RolService;
 import com.ufps.springboot.form.app.validation.UsuarioValidacion;
 
 @Controller
 @SessionAttributes("usuario")
 public class FormController {
 	
+	@Autowired RolEditor rolEditor;
+
 	@Autowired
 	private PaisPropertyEditor paisEditor;
-	
+
 	@Autowired
 	private PaisService paisService;
+
+	@Autowired
+	private RolService rolService;
 
 	@Autowired
 	private UsuarioValidacion validador;
@@ -52,24 +60,29 @@ public class FormController {
 
 		binder.registerCustomEditor(String.class, "nombre", new MayusculaEditor());
 		binder.registerCustomEditor(String.class, "apellido", new MayusculaEditor());
-		
+
 		binder.registerCustomEditor(Pais.class, "pais", paisEditor);
+		binder.registerCustomEditor(Rol.class, "roles", rolEditor);
 
 	}
-	
-	/*
-	 * @ModelAttribute("paises") public List<String> paises(){ return
-	 * Arrays.asList("España","Mexico", "Colombia", "Argentina"); }
-	 */
+
+	@ModelAttribute("listaRoles1")
+	public List<Rol> listaRoles1() {
+		return this.rolService.listar();
+	}
+
+	@ModelAttribute("paises")
+	public List<String> paises() {
+
+		return Arrays.asList("España", "Mexico", "Colombia", "Argentina");
+	}
 
 	@ModelAttribute("listaPaises")
-	public List<Pais> listaPaises(){
-		return Arrays.asList(new Pais(1,"ES","España"),
-							 new Pais(2,"MX","Mexico"),
-							 new Pais(3,"CO","Colombia"),
-							 new Pais(4,"AR","Argentina"));
+	public List<Pais> listaPaises() {
+		return Arrays.asList(new Pais(1, "ES", "España"), new Pais(2, "MX", "Mexico"), new Pais(3, "CO", "Colombia"),
+				new Pais(4, "AR", "Argentina"));
 	}
-	
+
 	@ModelAttribute("paisesMap")
 	public Map<String, String> paisesMap() {
 		Map<String, String> paises = new HashMap<>();
@@ -80,14 +93,24 @@ public class FormController {
 		return paises;
 
 	}
-	
+
+	@ModelAttribute("listaRolesMap")
+	public Map<String, String> listaRolesMap() {
+		Map<String, String> roles = new HashMap<>();
+		roles.put("ROLE_ADMIN", "Administrador");
+		roles.put("ROLE_USER", "Usuario");
+		roles.put("ROLE_MODERADOR", "Moderador");
+		return roles;
+
+	}
+
 	@ModelAttribute("listaRoles")
-	public List<String> listaRoles(){
+	public List<String> listaRoles() {
 		List<String> roles = new ArrayList<>();
 		roles.add("ROLE_ADMIN");
 		roles.add("ROLE_USER");
 		roles.add("ROLE_MODERADOR");
-		
+
 		return roles;
 	}
 

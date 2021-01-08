@@ -24,10 +24,10 @@
 		<div>
 
 			<label>Roles</label>
-			<div th:each="rol: ${listaRoles}">
+			<div th:each="rol: ${listaRoles1}">
 
-				<input type="checkbox" th:field="*{roles}" th:value="${rol}"> 
-				<label th:for="${#ids.prev('roles')}" th:text="${rol}"></label>
+				<input type="checkbox" th:field="*{roles}" th:value="${rol.id}"> 
+				<label th:for="${#ids.prev('roles')}" th:text="${rol.nombre}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
