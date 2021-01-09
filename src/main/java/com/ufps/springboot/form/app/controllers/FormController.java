@@ -65,6 +65,12 @@ public class FormController {
 		binder.registerCustomEditor(Rol.class, "roles", rolEditor);
 
 	}
+	
+	@ModelAttribute("genero")
+	public List<String> genero(){
+		return Arrays.asList("Hombre","Mujer");
+		
+	}
 
 	@ModelAttribute("listaRoles1")
 	public List<Rol> listaRoles1() {
@@ -121,6 +127,8 @@ public class FormController {
 		usuario.setNombre("Jhon");
 		usuario.setApellido("Delgado");
 		usuario.setId("123.456.789-k");
+		usuario.setHabilitar(true);
+		usuario.setValorSecreto("Valor Secreto");
 		model.addAttribute("titulo", "Formulario de Usuario");
 		model.addAttribute("usuario", usuario);
 		return "form";

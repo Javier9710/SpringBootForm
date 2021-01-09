@@ -50,21 +50,26 @@ public class Usuario {
 	@Min(5)
 	@Max(5000)
 	private Integer cuenta;
-	
+
 	@NotNull
 	@Future
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 
-	//@Valid
+	// @Valid
 	@NotNull
 	private Pais pais;
-	
+
 	@NotNull
 	private List<Rol> roles;
 
-	
-	
+	private Boolean habilitar;
+
+	@NotEmpty
+	private String genero;
+
+	private String valorSecreto;
+
 	public List<Rol> getRoles() {
 		return roles;
 	}
@@ -143,6 +148,30 @@ public class Usuario {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Boolean getHabilitar() {
+		return habilitar;
+	}
+
+	public void setHabilitar(Boolean habilitar) {
+		this.habilitar = habilitar;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getValorSecreto() {
+		return valorSecreto;
+	}
+
+	public void setValorSecreto(String valorSecreto) {
+		this.valorSecreto = valorSecreto;
 	}
 	
 	
