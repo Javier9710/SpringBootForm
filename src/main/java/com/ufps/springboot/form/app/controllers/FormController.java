@@ -129,6 +129,8 @@ public class FormController {
 		usuario.setId("123.456.789-k");
 		usuario.setHabilitar(true);
 		usuario.setValorSecreto("Valor Secreto");
+		usuario.setPais(new Pais(3,"CO","Colombia"));
+		usuario.setRoles(Arrays.asList(new Rol(2, "Usuario", "ROLE_USER")));
 		model.addAttribute("titulo", "Formulario de Usuario");
 		model.addAttribute("usuario", usuario);
 		return "form";

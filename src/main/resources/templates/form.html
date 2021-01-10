@@ -43,7 +43,9 @@
 			<label>Roles</label>
 			<div th:each="rol: ${listaRoles1}">
 
-				<input type="checkbox" th:field="*{roles}" th:value="${rol.id}">
+				<input type="checkbox" th:field="*{roles}" th:value="${rol.id}"
+				th:checked="${#lists.contains(usuario.roles, rolesss)}">
+				
 				<label th:for="${#ids.prev('roles')}" th:text="${rol.nombre}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
