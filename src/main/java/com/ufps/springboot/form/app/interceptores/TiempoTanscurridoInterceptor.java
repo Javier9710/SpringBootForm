@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 
 
-@Component
+@Component("tiempoTanscurridoInterceptor")
 public class TiempoTanscurridoInterceptor implements HandlerInterceptor {
 
 	private static final Logger logger = LoggerFactory.getLogger(TiempoTanscurridoInterceptor.class);
@@ -23,6 +24,7 @@ public class TiempoTanscurridoInterceptor implements HandlerInterceptor {
 		
 			throws Exception {
 		logger.info("TiempoTranscurridoInterceptor: preHandle() entrando...");
+		logger.info("Interceptando: " + handler);
 		long tiempoInicio = System.currentTimeMillis();
 		request.setAttribute("TiempoInicio", tiempoInicio);
 		
@@ -35,11 +37,17 @@ public class TiempoTanscurridoInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		if( handler instanceof HandlerMethod) {
+			HandlerMethod metodo = (HandlerMethod) handler;
+			logger.info("Es un methodo del controlador: "+ metodo.getMethod().getName());
+			
+			
+		}
 		long tiempoFinal = System.currentTimeMillis();
 		long tiempoInicio = (Long)request.getAttribute("TiempoInicio");
 		long tiempoTranscurrido = tiempoFinal - tiempoInicio;
 		
-		if(modelAndView!=null) {
+		if( handler instanceof HandlerMethod && modelAndView!=null) {
 			modelAndView.addObject("tiempoTranscurrido",tiempoTranscurrido);
 			
 			
