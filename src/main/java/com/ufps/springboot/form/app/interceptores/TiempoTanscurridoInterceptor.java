@@ -23,6 +23,10 @@ public class TiempoTanscurridoInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		
 			throws Exception {
+		if(request.getMethod().equalsIgnoreCase("psot")){
+			return true;
+		}
+		
 		logger.info("TiempoTranscurridoInterceptor: preHandle() entrando...");
 		logger.info("Interceptando: " + handler);
 		long tiempoInicio = System.currentTimeMillis();
